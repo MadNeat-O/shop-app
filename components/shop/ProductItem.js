@@ -88,15 +88,17 @@ const styles = StyleSheet.create({
     details: {
         alignItems: 'center',
         height: '15%',
-        padding: 10
+        padding: 5
     },
     title: {
         fontSize: 18,
-        marginVertical: 4
+        marginVertical: 4,
+        fontFamily: 'open-sans-bold'
     },
     price: {
         fontSize: 14,
-        color: '#888'
+        color: '#888',
+        fontFamily: 'open-sans'
     },
     buttons: {
         flexDirection: 'row',
