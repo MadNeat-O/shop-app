@@ -1,6 +1,6 @@
 //import libraries
 import React from 'react';
-import { StyleSheet, FlatList, Text, View } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import ProductItem from '../../components/shop/ProductItem';
@@ -19,8 +19,13 @@ const ProductsOverviewScreen = (props) => {
                         title={itemData.item.title}
                         price={itemData.item.price}
                         imageUrl={itemData.item.imageUrl}
-                        onViewDetail={console.log('View Details')}
-                        onAddToCart={console.log('Add to Cart')}
+                        onViewDetail={() => {
+                            props.navigation.navigate('ProductDetail', { 
+                                productId: itemData.item.id,
+                                productTitle: itemData.item.title
+                            })
+                        }}
+                        onAddToCart={() => {console.log('Add to Cart')}}
                     />
             }
         />
