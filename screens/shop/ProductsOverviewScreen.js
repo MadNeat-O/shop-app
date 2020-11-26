@@ -22,7 +22,7 @@ const ProductsOverviewScreen = (props) => {
                         price={itemData.item.price}
                         imageUrl={itemData.item.imageUrl}
                         onViewDetail={() => {
-                            pirops.navigation.navigate('ProductDetail', { 
+                            props.navigation.navigate('ProductDetail', { 
                                 productId: itemData.item.id,
                                 productTitle: itemData.item.title
                             })

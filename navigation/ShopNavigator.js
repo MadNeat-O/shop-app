@@ -1,9 +1,12 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Platform } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
+import CustomHeaderButton from '../components/UI/CustomHeaderButton';
 import Colors from '../constants/Colors';
 
 const ProductsNavigator = createStackNavigator({
@@ -25,7 +28,15 @@ const ProductsNavigator = createStackNavigator({
 });
 
 ProductsOverviewScreen.navigationOptions = {
-    headerTitle: 'All Products'
+    headerTitle: 'All Products',
+    headerRight: 
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item
+                title='Cart' 
+                iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                onPress={()=>{}}
+            />
+        </HeaderButtons>
 }
 
 ProductDetailScreen.navigationOptions = navData => {
