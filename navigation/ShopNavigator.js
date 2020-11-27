@@ -7,11 +7,13 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import CustomHeaderButton from '../components/UI/CustomHeaderButton';
+import CartScreen from '../screens/shop/CartScreen';
 import Colors from '../constants/Colors';
 
 const ProductsNavigator = createStackNavigator({
     ProductsOverview: ProductsOverviewScreen,
-    ProductDetail: ProductDetailScreen
+    ProductDetail: ProductDetailScreen,
+    CartScreen: CartScreen
 }, {
     defaultNavigationOptions: {
         headerStyle: {
@@ -27,16 +29,20 @@ const ProductsNavigator = createStackNavigator({
     }
 });
 
-ProductsOverviewScreen.navigationOptions = {
-    headerTitle: 'All Products',
-    headerRight: 
-        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-            <Item
-                title='Cart' 
-                iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-                onPress={()=>{}}
-            />
-        </HeaderButtons>
+ProductsOverviewScreen.navigationOptions = navData => {
+    return {
+        headerTitle: 'All Products',
+        headerRight: 
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                    title='Cart' 
+                    iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                    onPress={()=>{
+                        navData.navigation.navigate('CartScreen')
+                    }}
+                />
+            </HeaderButtons>
+    }
 }
 
 ProductDetailScreen.navigationOptions = navData => {

@@ -1,5 +1,5 @@
 import { ADD_TO_CART } from "../actions/CartActions";
-import { CartItem } from '../../models/cartItem';
+import CartItem from '../../models/cartItem';
 
 const initialState = {
     items: {},
