@@ -32,7 +32,7 @@ const ProductsNavigator = createStackNavigator({
 ProductsOverviewScreen.navigationOptions = navData => {
     return {
         headerTitle: 'All Products',
-        headerRight: 
+        headerRight: () =>
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                     title='Cart' 
