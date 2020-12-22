@@ -2,13 +2,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Colors from '../../constants/Colors';
 import CartItem from '../../components/shop/CartItem';
+import * as cartActions from '../../store/actions/CartActions';
 
 // create a component
 const CartScreen = (props) => {
+    const dispatch = useDispatch();
     const cartTotalAmount = useSelector((state) => state.cart.totalAmount)
     const cartItems = useSelector((state) => {
         const cartArr = []
@@ -42,9 +44,11 @@ const CartScreen = (props) => {
                 renderItem={itemData => 
                     <CartItem 
                         title={itemData.item.productTitle}
-                        amount={itemData.item.sum}
+                        amount={itemData.item.sum.toFixed(2)}
                         quantity={itemData.item.quantity}
-                        onRemove={() => {}}
+                        onRemove={() => {
+                            dispatch(cartActions.removeFromCart(itemData.item.productKey))
+                        }}
                     />
                 }
             />
