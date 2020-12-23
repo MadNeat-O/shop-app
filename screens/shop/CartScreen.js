@@ -1,7 +1,7 @@
 //import libraries
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Colors from '../../constants/Colors';
@@ -23,7 +23,9 @@ const CartScreen = (props) => {
                 sum: state.cart.items[key].sum
             })
         }
-        return cartArr;
+        return cartArr.sort((a, b) => {
+            a.productKey > b.productKey ? 1 : -1
+        });
     })
 
     return (
@@ -32,11 +34,11 @@ const CartScreen = (props) => {
                 <Text style={styles.summaryText}>
                     Total: <Text style={styles.amount}>${cartTotalAmount.toFixed(2)}</Text>
                 </Text>
-                <Button 
-                    title='Order Now'
-                    color={Colors.accent}
-                    disabled={cartItems.length === 0}
-                />
+                    <Button 
+                        title='Order Now'
+                        color={Colors.accent}
+                        disabled={cartItems.length === 0}
+                    />
             </View>
             <FlatList 
                 data={cartItems}
