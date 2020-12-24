@@ -1,6 +1,7 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -9,29 +10,42 @@ import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import CustomHeaderButton from '../components/UI/CustomHeaderButton';
 import CartScreen from '../screens/shop/CartScreen';
 import Colors from '../constants/Colors';
+import OrdersScreen from '../screens/shop/OrdersScreen';
+
+const defaultNavOptions = {
+    headerStyle: {
+        backgroundColor: Platform.OS === 'android' ?  Colors.primary : ''
+    },
+    headerTitleContainerStyle: {
+        fontFamily: 'open-sans-bold'
+    },
+    headerBackTitleStyle: {
+        fontFamily: 'open-sans'
+    },
+    headerTintColor: Platform.OS === 'android' ?  'white' : Colors.primary
+}
 
 const ProductsNavigator = createStackNavigator({
     ProductsOverview: ProductsOverviewScreen,
     ProductDetail: ProductDetailScreen,
     CartScreen: CartScreen
 }, {
-    defaultNavigationOptions: {
-        headerStyle: {
-            backgroundColor: Platform.OS === 'android' ?  Colors.primary : ''
-        },
-        headerTitleContainerStyle: {
-            fontFamily: 'open-sans-bold'
-        },
-        headerBackTitleStyle: {
-            fontFamily: 'open-sans'
-        },
-        headerTintColor: Platform.OS === 'android' ?  'white' : Colors.primary
-    }
+    defaultNavigationOptions: defaultNavOptions
 });
 
 ProductsOverviewScreen.navigationOptions = navData => {
     return {
         headerTitle: 'All Products',
+        headerLeft: () =>
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                    title='Menu' 
+                    iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+                    onPress={()=>{
+                        navData.navigation.toggleDrawer()
+                    }}
+                />
+            </HeaderButtons>,
         headerRight: () =>
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
@@ -51,4 +65,19 @@ ProductDetailScreen.navigationOptions = navData => {
     }
 }
 
-export default createAppContainer(ProductsNavigator);
+const OrdersNavigator = createStackNavigator({
+    Orders: OrdersScreen
+}, {
+    defaultNavigationOptions: defaultNavOptions
+});
+
+const ShopNavigator = createDrawerNavigator({
+    Products: ProductsNavigator,
+    Orders: OrdersNavigator
+}, {
+    contentOptions: {
+        activeTintColor: Colors.primary
+    }
+})
+
+export default createAppContainer(ShopNavigator);
