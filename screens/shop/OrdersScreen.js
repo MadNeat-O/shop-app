@@ -7,19 +7,23 @@ import { useSelector } from 'react-redux';
 // create a component
 const OrdersScreen = (props) => {
     const orders = useSelector(state => {
+        console.log(state.orders.orders);
         state.orders.orders
-    })
+    });
 
     return (
-        <FlatList 
-            data={orders}
-            keyExtractor={item => item.id}
-            renderItem={itemData => {
-                <Text>
-                    {itemData.item.totalAmount}
-                </Text>
-            }}
-        />
+        <View>
+            <Text>poooop</Text>
+            <FlatList 
+                data={orders}
+                keyExtractor={item => item.orderId}
+                renderItem={itemData => {
+                    <Text>
+                        {itemData.item.totalAmount}
+                    </Text>
+                }}
+            />
+        </View>
     )
 };
 

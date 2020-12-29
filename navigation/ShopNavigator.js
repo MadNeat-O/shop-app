@@ -97,4 +97,19 @@ const ShopNavigator = createDrawerNavigator({
     }
 })
 
+OrdersScreen.navigationOptions = navData => {
+    return {
+        headerLeft: () =>
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                    title='Menu' 
+                    iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+                    onPress={()=>{
+                        navData.navigation.toggleDrawer()
+                    }}
+                />
+            </HeaderButtons>,
+    }
+}
+
 export default createAppContainer(ShopNavigator);

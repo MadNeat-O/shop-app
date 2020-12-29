@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
 import CartItem from '../../components/shop/CartItem';
 import * as cartActions from '../../store/actions/CartActions';
-import * as ordersActions from '../../store/reducers/OrderReducer';
+import * as orderActions from '../../store/actions/OrderActions';
 
 // create a component
 const CartScreen = (props) => {
@@ -40,7 +40,8 @@ const CartScreen = (props) => {
                         color={Colors.accent}
                         disabled={cartItems.length === 0}
                         onPress={() => {
-                            dispatch(ordersActions.addOrder(cartItems, cartTotalAmount))
+                            console.log(cartItems);
+                            dispatch(orderActions.addOrder(cartItems, cartTotalAmount))
                         }}
                     />
             </View>
