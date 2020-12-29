@@ -9,8 +9,9 @@ import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import CustomHeaderButton from '../components/UI/CustomHeaderButton';
 import CartScreen from '../screens/shop/CartScreen';
-import Colors from '../constants/Colors';
+import Colors from '../constants/Colors';  
 import OrdersScreen from '../screens/shop/OrdersScreen';
+import { Ionicons } from '@expo/vector-icons';
 
 const defaultNavOptions = {
     headerStyle: {
@@ -30,6 +31,14 @@ const ProductsNavigator = createStackNavigator({
     ProductDetail: ProductDetailScreen,
     CartScreen: CartScreen
 }, {
+    navigationOptions: {
+        drawerIcon: drawerConfig => 
+            <Ionicons 
+                name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                size={23}
+                // color={drawerConfig.tintColor} 
+            />
+    },
     defaultNavigationOptions: defaultNavOptions
 });
 
@@ -68,6 +77,14 @@ ProductDetailScreen.navigationOptions = navData => {
 const OrdersNavigator = createStackNavigator({
     Orders: OrdersScreen
 }, {
+    navigationOptions: {
+        drawerIcon: drawerConfig => 
+            <Ionicons 
+                name={Platform.OS === 'android' ? 'md-list' : 'ios-list'}
+                size={23}
+                color={drawerConfig.tintColor} 
+            />
+    },
     defaultNavigationOptions: defaultNavOptions
 });
 
