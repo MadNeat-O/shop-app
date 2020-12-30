@@ -1,6 +1,6 @@
 //import libraries
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 
@@ -19,6 +19,7 @@ const OrdersScreen = (props) => {
                     <OrderItem 
                         amount={itemData.item.totalAmount} 
                         date={itemData.item.readableDate}
+                        items={itemData.item.items}
                     />
                 }
             />
