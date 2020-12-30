@@ -130,6 +130,7 @@ OrdersScreen.navigationOptions = navData => {
 
 UserProductScreen.navigationOptions = navData => {
     return {
+        headerTitle: 'User Products',
         headerLeft: () =>
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
