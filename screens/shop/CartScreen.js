@@ -40,7 +40,6 @@ const CartScreen = (props) => {
                         color={Colors.accent}
                         disabled={cartItems.length === 0}
                         onPress={() => {
-                            console.log(cartItems);
                             dispatch(orderActions.addOrder(cartItems, cartTotalAmount))
                         }}
                     />
