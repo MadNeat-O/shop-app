@@ -2,14 +2,16 @@
 import React from 'react';
 import { StyleSheet, Button  } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ProductItem from '../../components/shop/ProductItem';
 import Colors from '../../constants/Colors';
+import * as productsActions from '../../store/actions/ProductsActions'
 
 // create a component
 const UserProductScreen = (props) => {
     const userProducts = useSelector(state => state.products.userProducts);
+    const dispatch = useDispatch();
 
     return (
         <FlatList 
@@ -33,7 +35,8 @@ const UserProductScreen = (props) => {
                         title="Delete"
                         color={Colors.primary}
                         onPress={() => {
-                            
+                            console.log(itemData.item.id);
+                            dispatch(productsActions.deleteProduct(itemData.item.id))
                         }}
                     />
                 </ProductItem>
