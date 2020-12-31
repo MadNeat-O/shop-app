@@ -156,4 +156,20 @@ UserProductScreen.navigationOptions = navData => {
     }
 }
 
+EditProductScreen.navigationOptions = navData => {
+    return {
+        headerTitle: navData.navigation.getParam('productId') ? 'Edit Product' : 'Add Product',
+        headerRight: () =>
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item
+                title='Save' 
+                iconName={Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'}
+                onPress={()=>{
+                    navData.navigation.navigate('EditProduct')
+                }}
+            />
+        </HeaderButtons>,
+    }
+}
+
 export default createAppContainer(ShopNavigator);
