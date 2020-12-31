@@ -13,6 +13,7 @@ import Colors from '../constants/Colors';
 import OrdersScreen from '../screens/shop/OrdersScreen';
 import { Ionicons } from '@expo/vector-icons';
 import UserProductScreen from '../screens/user/UserProductsScreen';
+import EditProductScreen from '../screens/user/EditProductScreen';
 
 const defaultNavOptions = {
     headerStyle: {
@@ -90,7 +91,8 @@ const OrdersNavigator = createStackNavigator({
 });
 
 const AdminNavigator = createStackNavigator({
-    UserProducts: UserProductScreen
+    UserProducts: UserProductScreen,
+    EditProduct: EditProductScreen
 }, {
     navigationOptions: {
         drawerIcon: drawerConfig => 
@@ -138,6 +140,16 @@ UserProductScreen.navigationOptions = navData => {
                     iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
                     onPress={()=>{
                         navData.navigation.toggleDrawer()
+                    }}
+                />
+            </HeaderButtons>,
+        headerRight: () =>
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                    title='Add' 
+                    iconName={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
+                    onPress={()=>{
+                        navData.navigation.navigate('EditProduct')
                     }}
                 />
             </HeaderButtons>,
