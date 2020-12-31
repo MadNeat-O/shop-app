@@ -1,10 +1,11 @@
 //import libraries
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Button  } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 
 import ProductItem from '../../components/shop/ProductItem';
+import Colors from '../../constants/Colors';
 
 // create a component
 const UserProductScreen = (props) => {
@@ -19,9 +20,23 @@ const UserProductScreen = (props) => {
                     title={itemData.item.title}
                     price={itemData.item.price}
                     imageUrl={itemData.item.imageUrl}
-                    onViewDetail={() => {}}
-                    onAddToCart={()=> {}}
-                />
+                    onSelect={() => {}}
+                >
+                    <Button
+                        title="Edit"
+                        color={Colors.primary}
+                        onPress={() => {
+                            
+                        }}
+                    />
+                    <Button
+                        title="Delete"
+                        color={Colors.primary}
+                        onPress={() => {
+                            
+                        }}
+                    />
+                </ProductItem>
             }
         />
     )
