@@ -35,7 +35,6 @@ const UserProductScreen = (props) => {
                         title="Delete"
                         color={Colors.primary}
                         onPress={() => {
-                            console.log(itemData.item.id);
                             dispatch(productsActions.deleteProduct(itemData.item.id))
                         }}
                     />
