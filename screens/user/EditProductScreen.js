@@ -3,13 +3,20 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { useState } from 'react/cjs/react.development';
+import { useSelector } from 'react-redux';
 
 // create a component
 const EditProductScreen = (props) => {
-    const [title, setTitle] = useState();
-    const [imageUrl, setImageUrl] = useState();
-    const [price, setPrice] = useState();
-    const [description, setDescription] = useState();
+    const prodId = props.navigation.getParam('productId');
+    const editedProduct = useSelector(state => 
+        state.products.userProducts.find(prod => prod.id === prodId)
+    )
+
+    const [title, setTitle] = useState(editedProduct ? editedProduct.title : '');
+    const [imageUrl, setImageUrl] = useState(editedProduct ? editedProduct.imageUrl : '');
+    const [price, setPrice] = useState('');
+    const [description, setDescription] = useState(editedProduct ? editedProduct.description : '');
+
 
     return (
         <ScrollView>
@@ -30,6 +37,7 @@ const EditProductScreen = (props) => {
                         value={imageUrl} 
                     />
                 </View>
+                {editedProduct ? null : (
                 <View style={styles.formControl}>
                     <Text style={styles.label}>Price</Text>
                     <TextInput 
@@ -38,6 +46,7 @@ const EditProductScreen = (props) => {
                         value={price} 
                     />
                 </View>
+                )}
                 <View style={styles.formControl}>
                     <Text style={styles.label}>Description</Text>
                     <TextInput 
