@@ -1,8 +1,7 @@
 //import libraries
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import { useState } from 'react/cjs/react.development';
 import { useSelector } from 'react-redux';
 
 // create a component
@@ -17,6 +16,13 @@ const EditProductScreen = (props) => {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState(editedProduct ? editedProduct.description : '');
 
+    const submitHandler = useCallback(() => {
+        console.log('Submitting!');
+    }, []);
+
+    useEffect(() => {
+        props.navigation.setParams({ 'submit': submitHandler })
+    }, [submitHandler]);
 
     return (
         <ScrollView>

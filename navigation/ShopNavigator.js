@@ -157,18 +157,20 @@ UserProductScreen.navigationOptions = navData => {
 }
 
 EditProductScreen.navigationOptions = navData => {
+    const submitFunction = navData.navigation.getParam('submit');
+    
     return {
         headerTitle: navData.navigation.getParam('productId') ? 'Edit Product' : 'Add Product',
         headerRight: () =>
-        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-            <Item
-                title='Save' 
-                iconName={Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'}
-                onPress={()=>{
-                    navData.navigation.navigate('EditProduct')
-                }}
-            />
-        </HeaderButtons>,
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                    title='Save' 
+                    iconName={Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'}
+                    onPress={()=>{
+                        submitFunction()
+                    }}
+                />
+            </HeaderButtons>,
     }
 }
 
