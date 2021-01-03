@@ -2,10 +2,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as productsActions from '../../store/actions/ProductsActions';
 
 // create a component
 const EditProductScreen = (props) => {
+    const dispatch = useDispatch();
+
     const prodId = props.navigation.getParam('productId');
     const editedProduct = useSelector(state => 
         state.products.userProducts.find(prod => prod.id === prodId)
@@ -18,6 +22,11 @@ const EditProductScreen = (props) => {
 
     const submitHandler = useCallback(() => {
         console.log('Submitting!');
+        if (editedProduct) {
+            dispatch(productsActions.updateProduct(prodId, title, description, imageUrl ))
+        } else {
+            dispatch(productsActions.createProduct(title, description, imageUrl, +price))
+        }
     }, []);
 
     useEffect(() => {
