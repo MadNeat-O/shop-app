@@ -27,7 +27,7 @@ const EditProductScreen = (props) => {
         } else {
             dispatch(productsActions.createProduct(title, description, imageUrl, +price))
         }
-    }, []);
+    }, [dispatch, prodId, title, description, imageUrl]);
 
     useEffect(() => {
         props.navigation.setParams({ 'submit': submitHandler })
