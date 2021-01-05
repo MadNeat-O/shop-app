@@ -21,13 +21,13 @@ const EditProductScreen = (props) => {
     const [description, setDescription] = useState(editedProduct ? editedProduct.description : '');
 
     const submitHandler = useCallback(() => {
-        console.log('Submitting!');
+        console.log('editedProduct', editedProduct);
         if (editedProduct) {
-            dispatch(productsActions.updateProduct(prodId, title, description, imageUrl ))
+            dispatch(productsActions.updateProduct(prodId, title, description, imageUrl))
         } else {
             dispatch(productsActions.createProduct(title, description, imageUrl, +price))
         }
-    }, [dispatch, prodId, title, description, imageUrl]);
+    }, [dispatch, prodId, title, description, imageUrl, price]);
 
     useEffect(() => {
         props.navigation.setParams({ 'submit': submitHandler })

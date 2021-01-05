@@ -31,8 +31,8 @@ export default (state = initialState, action) => {
                 action.pid,
                 state.userProducts[productIndex].ownerId,
                 action.productData.title,
-                action.productData.imageUrl,
                 action.productData.description,
+                action.productData.imageUrl,
                 state.userProducts[productIndex].price
             );
             const updatedUserProduct = [...state.userProducts]
@@ -43,6 +43,12 @@ export default (state = initialState, action) => {
             );
             const updatedAvailableProducts = [...state.availableProducts];
             updatedAvailableProducts[availableProductIndex] = updatedProduct;
+            
+            return {
+                ...state,
+                availableProducts: updatedAvailableProducts,
+                userProducts: updatedUserProduct
+            }
             
         case DELETE_PRODUCT:
             return {
