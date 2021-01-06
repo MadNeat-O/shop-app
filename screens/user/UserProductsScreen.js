@@ -1,6 +1,6 @@
 //import libraries
 import React from 'react';
-import { StyleSheet, Button  } from 'react-native';
+import { StyleSheet, Button, Alert } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -15,6 +15,16 @@ const UserProductScreen = (props) => {
 
     const editProductHandler = (id) => {
         props.navigation.navigate('EditProduct', { productId: id  })
+    }
+
+    const deleteHandler = (id) => {
+        Alert.alert('Are you sure?', 'This will delete this item', [
+            {text: 'No', style: 'default'},
+            {text: 'Yes', style: 'destructive', onPress: () => {
+                console.log('Item Delete');
+                dispatch(productsActions.deleteProduct(id))
+            }}
+        ])
     }
 
     return (
@@ -40,9 +50,7 @@ const UserProductScreen = (props) => {
                     <Button
                         title="Delete"
                         color={Colors.primary}
-                        onPress={() => {
-                            dispatch(productsActions.deleteProduct(itemData.item.id))
-                        }}
+                        onPress={deleteHandler.bind(this, itemData.item.id)}
                     />
                 </ProductItem>
             }
