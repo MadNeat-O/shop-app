@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useReducer } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from 'react-redux';
+import Input from '../../components/UI/Input';
 
 import * as productsActions from '../../store/actions/ProductsActions';
 
@@ -104,50 +105,39 @@ const EditProductScreen = (props) => {
     return (
         <ScrollView>
             <View style={styles.form}>
-                <View style={styles.formControl}>
-                    <Text style={styles.label}>Title</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        onChangeText={textChangeHandler.bind(this, 'title')}
-                        value={formState.inputValues.title} 
-                        keyboardType= 'default'
-                        autoCapitalize='sentences'
-                        autoCorrect
-                        returnKeyType='next'
-                        onEndEditing={() => console.log('onEndEditing')}
-                        onSubmitEditing={() => console.log('onSubmitEditing')}
-                    />
-                    {!formState.inputValidities.title && <Text>Please enter a title</Text>}
-                </View>
-                <View style={styles.formControl}>
-                    <Text style={styles.label}>Image Url</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        onChangeText={textChangeHandler.bind(this, 'imageUrl')}
-                        value={formState.inputValues.imageUrl} 
-                        keyboardType= 'default'
-                    />
-                </View>
+                <Input 
+                    label='Title'
+                    errorText='Please enter a valid title'
+                    keyboardType= 'default'
+                    autoCapitalize='sentences'
+                    autoCorrect
+                    returnKeyType='next'
+                />
+                <Input 
+                    label='Image Url'
+                    errorText='Please enter a valid image url'
+                    keyboardType= 'default'
+                    autoCapitalize='sentences'
+                    autoCorrect
+                    returnKeyType='next'
+                />
                 {editedProduct ? null : (
-                <View style={styles.formControl}>
-                    <Text style={styles.label}>Price</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        onChangeText={textChangeHandler.bind(this, 'price')}
-                        value={formState.inputValues.price} 
+                    <Input 
+                        label='Price'
+                        errorText='Please enter a valid Price in USD'
                         keyboardType= 'decimal-pad'
+                        returnKeyType='next'
                     />
-                </View>
                 )}
-                <View style={styles.formControl}>
-                    <Text style={styles.label}>Description</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        onChangeText={text => textChangeHandler.bind(this, 'description')}
-                        value={formState.inputValues.description}
-                        keyboardType= 'default' 
-                    />
-                </View>
+                <Input 
+                    label='Title'
+                    errorText='Please enter a valid title'
+                    keyboardType= 'default'
+                    autoCapitalize='sentences'
+                    autoCorrect
+                    multiline
+                    numberOfLines={3}
+                />
             </View>
         </ScrollView>
     )
@@ -158,19 +148,6 @@ const styles = StyleSheet.create({
     form: {
         margin: 20,
         justifyContent: 'center'
-    },
-    formControl: {
-        width: '90%'
-    },
-    label: {
-        fontFamily:'open-sans-bold',
-        marginVertical: 8
-    },
-    input: {
-        paddingHorizontal: 2,
-        paddingVertical: 5,
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 1
     }
 });
 
