@@ -89,18 +89,14 @@ const EditProductScreen = (props) => {
         props.navigation.setParams({ 'submit': submitHandler })
     }, [submitHandler]);
 
-    const textChangeHandler = (inputId, text) => {
-        let isValid = false;
-        if (text.trim().length === 0) {
-            isValid = true;
-        }
+    const InputHandler = useCallback((inputId, inputValue, inputValidity) => {
         dispatchFormState({
             type: FORM_INPUT_UPDATE, 
-            value: text, 
-            isValid: isValid,
+            value: inputValue, 
+            isValid: inputValidity,
             input: inputId
         })
-    }
+    }, [dispatchFormState])
 
     return (
         <ScrollView>
@@ -112,6 +108,9 @@ const EditProductScreen = (props) => {
                     autoCapitalize='sentences'
                     autoCorrect
                     returnKeyType='next'
+                    onInputChange={InputHandler.bind(this, 'title')}
+                    initialValue={editedProduct ? editedProduct.title : ''}
+                    initialValidity={!!initialValidity}
                 />
                 <Input 
                     label='Image Url'
