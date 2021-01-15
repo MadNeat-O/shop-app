@@ -34,13 +34,13 @@ const Input = (props) => {
         touched: false
     });
 
-    const { onInputChange } = props;
+    const { onInputChange, id } = props;
 
     useEffect(() => {
         if (inputState.touched) {
-            onInputChange(inputState.value, inputState.isValid);
+            onInputChange(id, inputState.value, inputState.isValid);
         }
-    }, [inputState, onInputChange]);
+    }, [inputState, onInputChange, id]);
     
     const textChangeHandler = text => {
         const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -48,6 +48,7 @@ const Input = (props) => {
         if (props.required && text.trim().length === 0) {
             isValid = false;
         }
+        // if (props.email && )
         dispatch({ type: INPUT_CHANGE, value: text, isValid: isValid });
     };
 

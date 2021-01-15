@@ -58,6 +58,7 @@ const EditProductScreen = (props) => {
 
     const submitHandler = useCallback(() => {
         if (!formState.inputValidities.title) {
+            console.log(formState);
             Alert.alert (
                 'Wrong input', 
                 'Please check the errors in the form', 
@@ -102,41 +103,45 @@ const EditProductScreen = (props) => {
         <ScrollView>
             <View style={styles.form}>
                 <Input 
+                    id='title'
                     label='Title'
                     errorText='Please enter a valid title'
                     keyboardType= 'default'
                     autoCapitalize='sentences'
                     autoCorrect
                     returnKeyType='next'
-                    onInputChange={InputHandler.bind(this, 'title')}
+                    onInputChange={InputHandler}
                     initialValue={editedProduct ? editedProduct.title : ''}
                     initialValidity={!!editedProduct}
                     required
                 />
                 <Input 
+                    id= 'imageUrl'
                     label='Image Url'
                     errorText='Please enter a valid image url'
                     keyboardType= 'default'
                     autoCapitalize='sentences'
                     autoCorrect
                     returnKeyType='next'
-                    onInputChange={InputHandler.bind(this, 'imageUrl')}
+                    onInputChange={InputHandler}
                     initialValue={editedProduct ? editedProduct.imageUrl : ''}
                     initialValidity={!!editedProduct}
                     required
                 />
                 {editedProduct ? null : (
                     <Input 
+                        id= 'price'
                         label='Price'
                         errorText='Please enter a valid Price in USD'
                         keyboardType= 'decimal-pad'
                         returnKeyType='next'
-                        onInputChange={InputHandler.bind(this, 'price')}
+                        onInputChange={InputHandler}
                         required
                         min={0.01}
                     />
                 )}
                 <Input 
+                    id='description'
                     label='Description'
                     errorText='Please enter a valid description'
                     keyboardType= 'default'
@@ -144,7 +149,7 @@ const EditProductScreen = (props) => {
                     autoCorrect
                     multiline
                     numberOfLines={3}
-                    onInputChange={InputHandler.bind(this, 'description')}
+                    onInputChange={InputHandler}
                     initialValue={editedProduct ? editedProduct.description : ''}
                     initialValidity={!!editedProduct}
                     required
