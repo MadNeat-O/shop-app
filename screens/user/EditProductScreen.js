@@ -110,7 +110,8 @@ const EditProductScreen = (props) => {
                     returnKeyType='next'
                     onInputChange={InputHandler.bind(this, 'title')}
                     initialValue={editedProduct ? editedProduct.title : ''}
-                    initialValidity={!!initialValidity}
+                    initialValidity={!!editedProduct}
+                    required
                 />
                 <Input 
                     label='Image Url'
@@ -119,6 +120,10 @@ const EditProductScreen = (props) => {
                     autoCapitalize='sentences'
                     autoCorrect
                     returnKeyType='next'
+                    onInputChange={InputHandler.bind(this, 'imageUrl')}
+                    initialValue={editedProduct ? editedProduct.imageUrl : ''}
+                    initialValidity={!!editedProduct}
+                    required
                 />
                 {editedProduct ? null : (
                     <Input 
@@ -126,16 +131,23 @@ const EditProductScreen = (props) => {
                         errorText='Please enter a valid Price in USD'
                         keyboardType= 'decimal-pad'
                         returnKeyType='next'
+                        onInputChange={InputHandler.bind(this, 'price')}
+                        required
+                        min={0.01}
                     />
                 )}
                 <Input 
-                    label='Title'
-                    errorText='Please enter a valid title'
+                    label='Description'
+                    errorText='Please enter a valid description'
                     keyboardType= 'default'
                     autoCapitalize='sentences'
                     autoCorrect
                     multiline
                     numberOfLines={3}
+                    onInputChange={InputHandler.bind(this, 'description')}
+                    initialValue={editedProduct ? editedProduct.description : ''}
+                    initialValidity={!!editedProduct}
+                    required
                 />
             </View>
         </ScrollView>

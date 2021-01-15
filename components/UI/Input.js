@@ -61,11 +61,11 @@ const Input = (props) => {
             <TextInput 
                 {...props}
                 style={styles.input} 
-                value={formState.inputValues.title} 
+                value={inputState.value} 
                 onChangeText={textChangeHandler}
                 onBlur={lostFocusHandler}
             />
-            {!formState.inputValidities.title && <Text>{props.errorText}</Text>}
+            {!inputState.isValid && <Text>{props.errorText}</Text>}
     </View>
 )
 };
