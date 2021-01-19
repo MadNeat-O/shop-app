@@ -57,7 +57,7 @@ const EditProductScreen = (props) => {
     })
 
     const submitHandler = useCallback(() => {
-        if (!formState.inputValidities.title) {
+        if (formState.inputValidities.title) {
             console.log(formState);
             Alert.alert (
                 'Wrong input', 
